@@ -1,0 +1,69 @@
+<!--Q2. Write HTML code to generate the following output and display each element of
+list in different size, color & font. Use external CSS to format the list. [20 Marks]-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Plant Types</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; 
+        }
+
+        .non-flowering {
+            font-size: 24px; 
+            color: green; 
+        }
+        .non-flowering li {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .flowering {
+            font-size: 24px;
+            color: blue; 
+        }
+        .flowering li {
+            font-family: 'Georgia', serif; 
+        }
+
+        .rose {
+            font-size: 20px; 
+            color: black; 
+        }
+
+
+        .red-rose {
+            color: red; 
+            font-weight: bold; 
+        }
+
+        .pink-rose {
+            color: lightpink; 
+            font-weight: bold; 
+        }
+    </style>
+</head>
+<body>
+    <ul class="non-flowering">
+        <li>Non flowering plants
+            <ul>
+                <li>Fern</li>
+                <li>Spore</li>
+            </ul>
+        </li>
+    </ul>
+
+    <ul class="flowering">
+        <li>Flowering plants
+            <ul type="square">
+                <li>Lilly</li>
+                <li class="rose">Rose
+                    <ol>
+                        <li class="red-rose">Red Rose</li>
+                        <li class="pink-rose">Pink Rose</li>
+                    </ol>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>

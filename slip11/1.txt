@@ -1,0 +1,39 @@
+Q1. Execute the following commands. Also write its use. [10 Marks]
+
+a) Ping
+    Command :- ping <hostname or IP address>
+    Example :- ping google.com
+
+    Use:    Ping is used to check the connectivity between your machine and another machine (server or device) on a network.
+            It sends ICMP echo requests to the target host and listens for echo replies, providing information like round-trip time (RTT) and packet loss.
+
+b) Who
+    Command :- who
+    Example :- who
+
+    Use :   Who displays the list of users currently logged into the system.
+            It shows the username, terminal number, date, time, and source from which the user logged in.
+
+c) hostname
+    Command :- hostname
+    Example :- hostname
+               sudo hostname new_hostname (set a new hostname with)
+
+    Use :-  Hostname displays or sets the hostname of the current machine.
+            The hostname is the name of your device on the network.
+
+d) Traceroute
+    Command :- traceroute <hostname or IP address>
+    Example :- traceroute google.com
+
+    Use :-  Traceroute traces the path packets take from your machine to the target host.
+            It shows each hop (router or gateway) along the way and how long each hop took.
+            This is useful for diagnosing network issues and determining where packets are getting delayed or dropped.
+
+e) Netstat
+    Command :- netstat
+    Example :- netstat
+
+    Use :-  Netstat displays network connections, routing tables, interface statistics, and more.
+            It's commonly used to check open ports, active connections, and network activity.
+

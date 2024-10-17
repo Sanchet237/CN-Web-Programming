@@ -1,0 +1,29 @@
+<!--Q2. Write a JavaScript program to print factorial of a given number. [20 Marks]-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Factorial of Number</title>
+</head>
+<body>
+  <script>
+    function factorial(n) {
+      if (n === 0) {
+        return 1;
+      }
+      let f = 1;
+      for (let i = 1; i <= n; i++) {
+        f *= i;
+      }                
+      return f;
+    }
+
+    const n = parseInt(prompt("Enter a number to find its factorial:"), 10);
+    
+    if (isNaN(n) || n < 0) {
+      document.write("Please enter a valid non-negative integer.");
+    } else {
+      document.write(`Factorial of ${n} is: ${factorial(n)}`);
+    }
+  </script>
+</body>
+</html>

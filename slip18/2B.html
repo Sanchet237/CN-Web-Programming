@@ -1,0 +1,73 @@
+<!--Q2. Write a menu driven program using JavaScript to find square root, power and absolute
+value of a given number and validate them. [20 Marks]-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu Driven Program</title>
+    <script>
+        function showMenu() {
+            const choice = prompt(
+                "Choose an option:\n1. Find Square Root\n2. Find Power\n3. Find Absolute Value\n4. Exit"
+            );
+
+            switch (choice) {
+                case "1":
+                    findSquareRoot();
+                    break;
+                case "2":
+                    findPower();
+                    break;
+                case "3":
+                    findAbsoluteValue();
+                    break;
+                case "4":
+                    alert("Exiting program.");
+                    break;
+                default:
+                    alert("Invalid choice. Please choose a valid option.");
+                    showMenu();
+            }
+        }
+
+        function findSquareRoot() {
+            const n = prompt("Enter a number to find its square root:");
+            if (isNaN(n) || n < 0) {
+                alert("Invalid input. Please enter a non-negative number.");
+                findSquareRoot();
+            } else {
+                const sq = Math.sqrt(n);
+                alert(`The square root of ${n} is ${sq}`);
+                showMenu();
+            }
+        }
+
+        function findPower() {
+            const base = prompt("Enter the base number:");
+            const exp = prompt("Enter the exponent:");
+            if (isNaN(base) || isNaN(exp)) {
+                alert("Invalid input. Please enter valid numbers.");
+                findPower();
+            } else {
+                const power = Math.pow(base, exp);
+                alert(`${base} raised to the power of ${exp} is ${power}`);
+                showMenu();
+            }
+        }
+
+        function findAbsoluteValue() {
+            const n = prompt("Enter a number to find its absolute value:");
+            if (isNaN(n)) {
+                alert("Invalid input. Please enter a valid number.");
+                findAbsoluteValue();
+            } else {
+                const absValue = Math.abs(n);
+                alert(`The absolute value of ${n} is ${absValue}`);
+                showMenu();
+            }
+        }
+    </script>
+</head>
+<body onload="showMenu()">
+    <h1>Menu Driven Program for Square Root, Power, and Absolute Value</h1>
+</body>
+</html>

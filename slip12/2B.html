@@ -1,0 +1,23 @@
+<!--Q2. Write a JavaScript Program to read a number from user, store its factors into the array
+and display that array. [20 Marks]-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Factors of a Number</title>
+</head>
+<body>
+    <script>
+        let n = parseInt(prompt("Enter a number: "));
+        
+        let arr = [];
+
+        for (let i = 1; i <= n; i++) {
+            if (n % i === 0) {
+                arr.push(i);
+            }
+        }
+
+        document.write("Factors of " + n + " are: " + arr.join(", "));
+    </script>
+</body>
+</html>
