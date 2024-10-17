@@ -1,0 +1,60 @@
+RAILWAY RESERVATION
+
+CREATE TABLE Train (Train_no INTEGER PRIMARY KEY, train_name VARCHAR(20), depart_time TIME, arrival_time TIME, source_stn VARCHAR(20), dest_stn VARCHAR(20), no_of_res_bogies INTEGER, bogie_capacity INTEGER);
+CREATE TABLE Passenger (Passenger_id INTEGER PRIMARY KEY, passenger_name VARCHAR(20), address VARCHAR(30), age INTEGER, gender CHAR(1));
+CREATE TABLE Ticket (Ticket_no INTEGER PRIMARY KEY, Train_no INTEGER, Passenger_id INTEGER, bogie_no INTEGER, no_of_berths INTEGER, tdate DATE, ticket_amt DECIMAL(7, 2), ticket_status CHAR(1) CHECK (ticket_status IN ('W', 'C')), FOREIGN KEY (Train_no) REFERENCES Train (Train_no), FOREIGN KEY (Passenger_id) REFERENCES Passenger (Passenger_id));
+
+INSERT INTO Train VALUES (101, 'Shatabdi Express', '08:00', '14:00', 'Mumbai', 'Delhi', 10, 72),(102, 'Rajdhani Express', '06:00', '12:00', 'Delhi', 'Chennai', 12, 70);
+INSERT INTO Passenger VALUES(1, 'Rahul', 'Mumbai', 30, 'M'),(2, 'Anjali', 'Pune', 25, 'F'),(3, 'Amit', 'Delhi', 35, 'M'),(4, 'Priya', 'Bangalore', 28, 'F'),(5, 'Suresh', 'Hyderabad', 40, 'M');
+INSERT INTO Ticket VALUES(1001, 101, 1, 1, 1, '2022-03-02', 1500.00, 'W'),(1002, 101, 2, 1, 1, '2022-03-02', 1500.00, 'C'),(1003, 101, 3, 1, 1, '2022-03-02', 1500.00, 'C'),(1004, 102, 4, 2, 1, '2021-05-04', 2000.00, 'C'),(1005, 102, 5, 2, 1, '2021-05-04', 2000.00, 'C'),(1006, 102, 1, 2, 1, '2021-05-04', 2000.00, 'W'),(1007, 102, 3, 2, 1, '2022-01-01', 2000.00, 'C');
+
+Q.1) Create a View:
+
+CREATE VIEW Shatabdi_Waiting AS SELECT P.passenger_name FROM Passenger P JOIN Ticket T ON P.Passenger_id = T.Passenger_id JOIN Train TR ON T.Train_no = TR.Train_no WHERE TR.train_name = 'Shatabdi Express' AND T.ticket_status = 'W' AND T.tdate = '2022-03-02';
+SELECT * FROM Shatabdi_Waiting;
+
+CREATE VIEW Rajdhani_Bookings AS SELECT T.Ticket_no, P.passenger_name, T.ticket_amt FROM Passenger P JOIN Ticket T ON P.Passenger_id = T.Passenger_id JOIN Train TR ON T.Train_no = TR.Train_no WHERE TR.train_name = 'Rajdhani Express' AND T.tdate = '2021-05-04' ORDER BY T.Ticket_no LIMIT 3;
+SELECT * FROM Rajdhani_Bookings;
+
+Q.2) Using above database solve following questions:
+
+CREATE OR REPLACE FUNCTION restrict_bogie_capacity() RETURNS TRIGGER AS $$
+BEGIN
+IF NEW.bogie_capacity > 25 THEN
+RAISE EXCEPTION 'Bogie capacity cannot exceed 30';
+END IF;
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_bogie_capacity
+BEFORE INSERT OR UPDATE ON Train
+FOR EACH ROW EXECUTE FUNCTION restrict_bogie_capacity();
+
+INSERT INTO Train VALUES (103, 'Duronto Express', '09:00', '15:00', 'Kolkata', 'Mumbai', 12, 35);
+
+CREATE OR REPLACE FUNCTION display_train_wise_confirmed_bookings()
+RETURNS VOID AS $$
+DECLARE
+train_record RECORD;
+ticket_record RECORD;
+booking_date DATE := '2022-04-19';
+BEGIN
+FOR train_record IN SELECT Train_no, train_name FROM Train
+LOOP
+RAISE NOTICE 'Train: %, Train Name: %', train_record.Train_no, train_record.train_name;
+FOR ticket_record IN
+SELECT T.Ticket_no, P.passenger_name, T.ticket_amt
+FROM Ticket T
+JOIN Passenger P ON T.Passenger_id = P.Passenger_id
+WHERE T.Train_no = train_record.Train_no
+AND T.ticket_status = 'C'
+AND T.tdate = booking_date
+LOOP
+RAISE NOTICE 'Ticket No: %, Passenger: %, Amount: %', ticket_record.Ticket_no, ticket_record.passenger_name, ticket_record.ticket_amt;
+END LOOP;
+END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT display_train_wise_confirmed_bookings();

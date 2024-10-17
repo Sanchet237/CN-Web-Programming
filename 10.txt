@@ -1,0 +1,59 @@
+PROJECT-EMPLOYEE DATABASE
+
+CREATE TABLE Project (Pno INTEGER PRIMARY KEY, pname VARCHAR(30) NOT NULL, ptype VARCHAR(20), duration INTEGER);
+CREATE TABLE Employee (Eno INTEGER PRIMARY KEY, ename VARCHAR(20), qualification CHAR(15), joining_date DATE);
+CREATE TABLE Project_Employee (Pno INTEGER, Eno INTEGER, start_date_of_project DATE, no_of_hours_worked INTEGER, PRIMARY KEY (Pno, Eno), FOREIGN KEY (Pno) REFERENCES Project(Pno), FOREIGN KEY (Eno) REFERENCES Employee(Eno));
+
+INSERT INTO Project VALUES (1, 'Robotics', 'Research', 24), (2, 'ERP', 'Development', 18), (3, 'AI Model', 'Research', 12), (4, 'Web Application', 'Development', 9);
+INSERT INTO Employee VALUES (101, 'Amit', 'B.Tech', '2020-01-10'), (102, 'Priya', 'MCA', '2021-03-15'), (103, 'Rahul', 'B.Sc', '2019-07-22'), (104, 'Sneha', 'M.Tech', '2022-06-10');
+INSERT INTO Project_Employee VALUES (1, 101, '2022-05-01', 120), (2, 102, '2022-04-15', 90), (1, 103, '2021-08-10', 50), (3, 104, '2023-01-12', 60), (2, 101, '2022-08-22', 130), (4, 102, '2022-09-05', 70);
+
+Q.1) Create a View:
+
+CREATE OR REPLACE VIEW Employee_Details AS SELECT Eno, ename, qualification, joining_date FROM Employee ORDER BY joining_date;
+SELECT * FROM Employee_Details;
+
+CREATE OR REPLACE VIEW Employees_Worked_Less_Than_100_Hours AS SELECT e.Eno, e.ename, p.pname, pe.no_of_hours_worked FROM Employee e JOIN Project_Employee pe ON e.Eno = pe.Eno JOIN Project p ON p.Pno = pe.Pno WHERE pe.no_of_hours_worked < 100;
+SELECT * FROM Employees_Worked_Less_Than_100_Hours;
+
+Q.2) Using above database solve following questions:
+
+CREATE OR REPLACE FUNCTION check_joining_date()
+RETURNS TRIGGER AS $$
+BEGIN
+IF NEW.joining_date >= CURRENT_DATE THEN
+RAISE EXCEPTION 'Joining date must be before the current date.';
+END IF;
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER validate_joining_date
+BEFORE INSERT OR UPDATE ON Employee
+FOR EACH ROW
+EXECUTE FUNCTION check_joining_date();
+
+INSERT INTO Employee VALUES (101, 'Vijay', 'Bachelors', '2022-09-01');
+INSERT INTO Employee VALUES (102, 'Anil', 'Masters', CURRENT_DATE);
+
+CREATE OR REPLACE FUNCTION get_employee_count_by_project(p_project_name VARCHAR)
+RETURNS INTEGER AS $$
+DECLARE
+employee_count INTEGER;
+BEGIN
+SELECT COUNT(*)
+INTO employee_count
+FROM Project
+WHERE pname = p_project_name;
+IF employee_count = 0 THEN
+RAISE EXCEPTION 'Invalid project name: %', p_project_name;
+END IF;
+SELECT COUNT(*)
+INTO employee_count
+FROM Project_Employee
+WHERE project_name = p_project_name;
+RETURN employee_count;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT get_employee_count_by_project('Robotics'); SANCHET KOLEKA
