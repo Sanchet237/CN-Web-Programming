@@ -1,0 +1,39 @@
+<!--Write a JavaScript code to calculate maximum, minimum, sum and average of numbers
+in an array.-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Array Calculations</title>
+    <script>
+        function calculateArrayStats() {
+            const numbers = [5, 12, 8, 20, 3]; 
+            let sum = 0;
+            let max = numbers[0];
+            let min = numbers[0];
+
+            for (let i = 0; i < numbers.length; i++) {
+                sum += numbers[i];
+                if (numbers[i] > max) {
+                    max = numbers[i];
+                }
+                if (numbers[i] < min) {
+                    min = numbers[i];
+                }
+            }
+
+            let avg = sum / numbers.length;
+
+            document.getElementById("output").innerText = 
+                `Array: [${numbers.join(', ')}]\n` +
+                `Maximum: ${max}\nMinimum: ${min}\nSum: ${sum}\nAverage: ${avg.toFixed(2)}`;
+        }
+    </script>
+</head>
+<body>
+
+    <button onclick="calculateArrayStats()">Calculate Array Stats</button>
+    
+    <pre id="output"></pre> 
+
+</body>
+</html>

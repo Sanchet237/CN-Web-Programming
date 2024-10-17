@@ -1,0 +1,30 @@
+<!--Q2. Write a JavaScript program to print the reverse of a number. [20 Marks]-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reverse Number</title>
+</head>
+<body>
+    <script>
+        function Reverse(n) {
+            let rNo = 0; 
+            let rem;
+            while (n !== 0) {
+                rem = n % 10;                
+                rNo = rNo * 10 + rem;       
+                n = Math.floor(n / 10);     
+            }
+            return rNo;
+        }
+
+        const userInput = prompt("Please enter a number to reverse:"); 
+        const n = parseInt(userInput); 
+
+        if (!isNaN(n)) {
+            document.write(`Reverse of ${n} ==> ${Reverse(n)}`);
+        } else {
+            document.write("Invalid input! Please enter a valid number.");
+        }
+    </script>
+</body>
+</html>

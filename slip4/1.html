@@ -1,0 +1,52 @@
+<!--Q.1. Create HTML page with following specifications [10 Marks]
+a) Title should be about myCity
+b) Place your City name at the top of the page in large text and in blue color
+c) Add names of landmarks in your city each in a different color, style and typeface d.
+d) One of the landmark, your college name should be blinking.
+e) Add scrolling text with a message of your choice.-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MY CITY</title>
+    <style>
+        .name {
+            font-size: 36px;
+            color: blue;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .blink {
+            animation: blinker 1s linear infinite;
+        }
+        @keyframes blinker {
+            50% { opacity: 0; }
+        }
+
+        .landmarks {
+            font-size: 20px;
+            margin: 20px;
+        }
+        .landmarks li {
+            margin-bottom: 10px;
+        }
+        .l1 { color: red; }
+        .l2 { color: green; }
+        .l3 { color: orange; }
+    </style>
+</head>
+<body>
+
+    <div class="name">PUNE CITY</div>
+
+    <ul class="landmarks">
+        <li class="l1"><b>Sinhgad Fort</b></li>
+        <li class="l2"><i>Shaniwar Wada</i></li>
+        <li class="l3"><u>Rajiv Gandhi Zoo</u></li>
+        <li class="blink">MIT Arts Commerce And Science College Pune</li> 
+    </ul>
+
+    <marquee>Welcome to Pune City</marquee>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!--Q2. Write a JavaScript program to accept a number from user and display that number in
+words (e.g. 226 Two Two Six)-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of Digits of a Number</title>
+</head>
+<body>
+    <script>
+        function word(n) {
+            let result = ''; 
+            for (let i = 0; i < n.length; i++) {
+                let digit = n[i];
+                switch(digit) {
+                    case '0': result += "ZERO "; break;
+                    case '1': result += "ONE "; break;
+                    case '2': result += "TWO "; break;
+                    case '3': result += "THREE "; break;
+                    case '4': result += "FOUR "; break;
+                    case '5': result += "FIVE "; break;
+                    case '6': result += "SIX "; break;
+                    case '7': result += "SEVEN "; break;
+                    case '8': result += "EIGHT "; break;
+                    case '9': result += "NINE "; break;
+                    default: break; 
+                }
+            }
+            return result.trim(); 
+        }
+
+        let ip = prompt("Enter a number");
+        if (ip !== null && !isNaN(ip)) { 
+            document.write(`The number ${ip} in words is: ${word(ip)}`);
+        } else {
+            document.write("Invalid input! Please enter a valid number.");
+        }
+    </script>
+</body>
+</html>

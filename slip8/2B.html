@@ -1,0 +1,55 @@
+<!--Q2. Write a JavaScript program to compare the values of password and confirmed password
+field and display message accordingly. Also perform the validation to check any of the
+field should not be empty. [20 Marks]-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Login</title>
+    <script>
+        function validate() {
+            var username = document.getElementById("uname").value.trim();
+            var p = document.getElementById("pass").value;
+            var CP = document.getElementById("cpass").value;
+            var nameRegex = /^[A-Za-z]+$/;
+
+            if (username === "") {
+                alert("Name is required.");
+                return false;
+            }
+            if (!nameRegex.test(username)) {
+                alert("Name should contain only alphabets.");
+                return false;
+            }
+            if (p === "") {
+                alert("Password is required.");
+                return false;
+            }
+            if (p.length < 6) {
+                alert("Password should be at least 6 characters long.");
+                return false;
+            }
+            if (p !== CP) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1><b>USER LOGIN</b></h1>
+    <form onsubmit="return validate()">
+        <label for="uname">Username:</label>
+        <input type="text" id="uname" name="uname" placeholder="Enter your name"><br><br>
+
+        <label for="pass">Password:</label>
+        <input type="password" id="pass" name="pass" placeholder="Enter password"><br><br>
+
+        <label for="cpass">Confirm Password:</label>
+        <input type="password" id="cpass" name="cpass" placeholder="Confirm password"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

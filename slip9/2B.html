@@ -1,0 +1,25 @@
+<!--Q2. Write a JavaScript code to greet the user according to the current timing. [20 Marks]-->
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+<title>greet as per time </title>
+</head>
+<script>
+           document.write("<center>");
+           var day = new Date();
+           var hr = day.getHours();
+           if (hr >= 0 && hr < 12) {
+           document.write("Good Morning!");
+           } else if (hr == 12) {
+           document.write("Good Noon!");
+           } else if (hr >= 12 && hr <= 17) {
+           document.write("Good Afternoon!");
+           } else {
+           document.write("Good Evening!");
+           }
+           document.write("</center>");
+</script>
+</html>
+</body>
+</html>

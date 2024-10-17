@@ -1,0 +1,43 @@
+Q.1 Execute the following commands. Also write its use. [10 Marks]
+
+a) Netstat
+    Command :- netstat
+    Example :- netstat
+
+    Use :-  Netstat displays network connections, routing tables, interface statistics, and more.
+            It's commonly used to check open ports, active connections, and network activity.
+
+b) Nmap
+    Command: nmap
+    Example: nmap 192.168.1.1
+
+    Use :- Nmap is a network scanning tool that finds devices on a network, checks which ports are open, 
+            and identifies the services running on those ports. It's used for discovering network details and checking security.
+
+c) Nslookup
+    Command: nslookup
+    Example: nslookup google.com
+    Use :- Nslookup is a tool that queries DNS servers to find the IP address for a given 
+            domain name or vice versa. It's used to troubleshoot and check DNS records easily.
+
+d) Ping
+    Command :- ping <hostname or IP address>
+    Example :- ping google.com
+
+    Use:    Ping is used to check the connectivity between your machine and another machine (server or device) on a network.
+            It sends ICMP echo requests to the target host and listens for echo replies, providing information 
+            like round-trip time (RTT) and packet loss.
+
+e) Who
+    Command :- who
+    Example :- who
+
+    Use :   Who displays the list of users currently logged into the system.
+            It shows the username, terminal number, date, time, and source from which the user logged in.
+
+
+
+
+
+    
+
