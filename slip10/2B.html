@@ -1,2 +1,48 @@
 <!--Q2. Write a JavaScript program to read employee details using HTML tags. Calculate and
 display net salary of an employee.-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Salary Calculator</title>
+    <script>
+        function calculateSalary() {
+            let empName = document.getElementById("empName").value.trim(),
+                department = document.getElementById("department").value.trim(),
+                designation = document.getElementById("designation").value.trim(),
+                basicSalary = parseFloat(document.getElementById("basicSalary").value),
+                da = parseFloat(document.getElementById("da").value),
+                hra = parseFloat(document.getElementById("hra").value);
+            
+            if (!empName || !department || !designation || isNaN(basicSalary) || isNaN(da) || isNaN(hra)) {
+                alert("Fill all fields correctly.");
+                return;
+            }
+
+            let netSalary = basicSalary + da + hra;
+            document.getElementById("result").innerHTML = `
+                <h3>Pay Slip</h3>
+                <p>Name: ${empName}</p>
+                <p>Department: ${department}</p>
+                <p>Designation: ${designation}</p>
+                <p>Net Salary: ₹${netSalary.toFixed(2)}</p>
+            `;
+        }
+    </script>
+</head>
+<body>
+
+    <h3>Employee Net Salary Calculator</h3>
+    <form onsubmit="event.preventDefault(); calculateSalary();">
+        <label>Name:</label><input type="text" id="empName"><br><br>
+        <label>Department:</label><input type="text" id="department"><br><br>
+        <label>Designation:</label><input type="text" id="designation"><br><br>
+        <label>Basic Salary (₹):</label><input type="number" id="basicSalary"><br><br>
+        <label>DA (₹):</label><input type="number" id="da"><br><br>
+        <label>HRA (₹):</label><input type="number" id="hra"><br><br>
+        <input type="submit" value="Calculate">
+    </form>
+
+    <div id="result"></div>
+
+</body>
+</html>
